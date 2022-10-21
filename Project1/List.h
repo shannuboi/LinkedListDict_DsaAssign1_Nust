@@ -1,11 +1,18 @@
-#include <iostream>
 #include "Dictionary.h"
-using namespace std;
 
-class ListNode{   //classs definition of Node 
+class ListNode{   //class definition of Node 
   public:
     Dictionary data;
     ListNode *next;
 };
 
-//PASTE YOUR LINKED LIST CODE HERE
+class SinglyLinkedList
+{
+public:
+	SinglyLinkedList() = default;
+	bool IsEmpty() const;
+	bool Search(Dictionary d) const;
+	void TopInsert(Dictionary d);
+private:
+	ListNode* start = nullptr;
+};
