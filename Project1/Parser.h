@@ -6,7 +6,19 @@ using namespace std;
 
 string filename; //stores filename
 
-void readFileData(SinglyLinkedList<Dictionary>& list) //reads text from a file and writes it to the AVL tree
+class DictList : public SinglyLinkedList<Dictionary>
+{
+public:
+	void WriteToDictionaryFile(fstream& file) const override
+	{
+		for (ListNode* cur = start; cur; cur = cur->next) // loop until cur becomes null
+		{
+			file << cur->data.word << " " << cur->data.meaning << "\n";
+		}
+	}
+};
+
+void readFileData(DictList& list) //reads text from a file and writes it to the AVL tree
 {
 	Dictionary dict;
 	string word, meaning;
@@ -27,34 +39,25 @@ void readFileData(SinglyLinkedList<Dictionary>& list) //reads text from a file a
 	fin.close();
 }
 
-void writeToFile(ListNode *headNode) //write the linked list to a text file
+void writeToFile(DictList& list) //write the linked list to a text file
 {
-  string word, meaning;
-  
-  fstream dictFile; //create fstream object for the file
-  cout << "\e[46mEnter the filename\x1b[0m "; 
+	fstream dictFile; //create fstream object for the file
+	cout << "\e[46mEnter the filename\x1b[0m "; 
 	cin.ignore();
-  cin >> filename;
-  dictFile.open(filename, std::ios::app); //create/open a text file in append mode. new information is always added to the end
+	cin >> filename;
+	dictFile.open(filename, std::ios::app); //create/open a text file in append mode. new information is always added to the end
 
-  ListNode *iterator = headNode;
+	list.WriteToDictionaryFile(dictFile);
 
-  while(iterator != NULL) { //iterate over the linked list
-    word = iterator->data.word;
-    meaning = iterator->data.meaning;
-    dictFile << word;
-    dictFile << " " << meaning << endl; //write to data file 
-    iterator = iterator->next;   //advance to next node
-  }
-  dictFile.close();
-  cout << "\e[0;32mDictionary entries added.\x1b[0m\n";
+	dictFile.close();
+	cout << "\e[0;32mDictionary entries added.\x1b[0m\n";
 }
 
 void mainMenu() //menu function
 {
   string word, meaning; //stores the word and meaning
   char choice;  //stores user choice for the actions
-  SinglyLinkedList<Dictionary> list;
+  DictList list;
 
   cout << "\e[1;35mInput 's' to terminate the program anytime.\e[0;37m" << endl;
   while (choice != 's') //while loop until 's' is entered

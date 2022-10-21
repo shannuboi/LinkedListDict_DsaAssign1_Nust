@@ -12,7 +12,6 @@ class ListNode{   //class definition of Node
 template <typename T>
 class SinglyLinkedList
 {
-	typedef ListNode<T> ListNode;
 public:
 	SinglyLinkedList() = default;
 	~SinglyLinkedList()
@@ -108,7 +107,12 @@ public:
 		}
 		start = nullptr;
 	}
-private:
+
+	// FUNCTIONS FOR ASSIGNMENT QUESTIONS, Definations in mylist sub-class in Perser.h
+	virtual void WriteToDictionaryFile(fstream& file) const {};
+protected:
+	typedef ListNode<T> ListNode;
+
 	// Since it will insert after a node, pos acts like pos + 1 (Insertion happens after specified pos)  
 	void InsertAfter(T d, ListNode * node, int pos)
 	{
