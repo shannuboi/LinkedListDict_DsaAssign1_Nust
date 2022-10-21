@@ -1,4 +1,5 @@
 #include "List.h"
+#include <assert.h>
 
 SinglyLinkedList::~SinglyLinkedList()
 {
@@ -30,6 +31,16 @@ bool SinglyLinkedList::IsEmpty() const
 	return !start; // if start hold nothing return true
 }
 
+int SinglyLinkedList::GetLength() const
+{
+	int count = 0;
+	for (ListNode* cur = start; cur; cur = cur->next) // loop until cur becomes null
+	{
+		count++;
+	}
+	return count;
+}
+
 bool SinglyLinkedList::Search(Dictionary d) const
 {
 	for (ListNode* cur = start; cur; cur = cur->next) // loop until cur becomes null
@@ -42,6 +53,7 @@ bool SinglyLinkedList::Search(Dictionary d) const
 // First pos is zero
 void SinglyLinkedList::Insert(Dictionary d, int pos)
 {
+	assert(pos >= 0 && pos <= GetLength());
 	if (pos == 0)
 	{
 		ListNode* newnode = new ListNode;
@@ -58,8 +70,8 @@ void SinglyLinkedList::Insert(Dictionary d, int pos)
 void SinglyLinkedList::Delete(Dictionary d)
 {
 	ListNode* cur = start;
-	ListNode* last;
-	while (cur || cur->data != d) // loop until cur becomes null
+	ListNode* last = nullptr;
+	while (cur && cur->data != d) // loop until cur becomes null
 	{
 		last = cur;
 		cur = cur->next;

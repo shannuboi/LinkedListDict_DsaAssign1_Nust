@@ -14,6 +14,7 @@ public:
 	SinglyLinkedList(const SinglyLinkedList& src);
 	void operator=(const SinglyLinkedList& rhs);
 	bool IsEmpty() const;
+	int GetLength() const;
 	bool Search(Dictionary d) const;
 	void Insert(Dictionary d, int pos = 0);
 	void Delete(Dictionary d);
