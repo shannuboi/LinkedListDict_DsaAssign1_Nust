@@ -6,24 +6,24 @@ using namespace std;
 
 string filename; //stores filename
 
-void readFileData(ListNode *headNode) //reads text from a file and writes it to the AVL tree
+void readFileData(SinglyLinkedList<Dictionary>& list) //reads text from a file and writes it to the AVL tree
 {
-	Dictionary *dict;
+	Dictionary dict;
 	string word, meaning;
 	fstream fin;
 	cout << "\e[46mEnter the filename\x1b[0m "; 
 	cin.ignore();
-  cin >> filename;
+	cin >> filename;
 	fin.open(filename);
-  cout << "\e[0;32mFile reading succesful.\x1b[0m\n";
-  while( fin >> word )  //write into file name
-  {
-    fin.ignore();
-    getline(fin,meaning);
-    dict = new Dictionary(word,meaning);
-    cout << *dict << endl; //output newly created Dictionary object
-    //remove above line insert data into a  linked list
-  }
+	cout << "\e[0;32mFile reading succesful.\x1b[0m\n";
+	while( fin >> word )  //write into file name
+	{
+		fin.ignore();
+		getline(fin,meaning);
+		dict = Dictionary(word,meaning);
+	
+		list.Insert(dict);
+	}
 	fin.close();
 }
 
@@ -54,6 +54,7 @@ void mainMenu() //menu function
 {
   string word, meaning; //stores the word and meaning
   char choice;  //stores user choice for the actions
+  SinglyLinkedList<Dictionary> list;
 
   cout << "\e[1;35mInput 's' to terminate the program anytime.\e[0;37m" << endl;
   while (choice != 's') //while loop until 's' is entered
@@ -67,11 +68,11 @@ void mainMenu() //menu function
     {
       case('1'):
       {
-        readFileData(list.start);
+        readFileData(list);
       }; break;
       case('2'):
       {
-        writeToFile(list.start);
+        writeToFile(list);
       }; break;
       case('s'):
       {
