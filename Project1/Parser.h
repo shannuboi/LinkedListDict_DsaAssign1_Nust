@@ -56,7 +56,7 @@ void writeToFile(DictList& list) //write the linked list to a text file
 void mainMenu() //menu function
 {
   string word, meaning; //stores the word and meaning
-  char choice;  //stores user choice for the actions
+  char choice = 0;  //stores user choice for the actions
   DictList list;
 
   cout << "\e[1;35mInput 's' to terminate the program anytime.\e[0;37m" << endl;
