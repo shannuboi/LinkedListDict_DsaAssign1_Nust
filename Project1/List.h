@@ -108,8 +108,6 @@ public:
 		start = nullptr;
 	}
 
-	// FUNCTIONS FOR ASSIGNMENT QUESTIONS, Definations in mylist sub-class in Perser.h
-	virtual void WriteToDictionaryFile(fstream& file) const {};
 protected:
 	typedef ListNode<T> ListNode;
 
