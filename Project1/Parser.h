@@ -29,6 +29,21 @@ public:
 	{
 		PrintReverseRecurrsive(start);
 	}
+	void ReverseList()
+	{
+		ListNode* prev = nullptr;
+		ListNode* cur = start;
+		
+		while (cur) // loop until cur becomes null
+		{
+			ListNode* tempNext = cur->next;
+
+			cur->next = prev;
+			prev = cur;
+			cur = tempNext;
+		}
+		start = prev;
+	}
 
 private:
 	void PrintReverseRecurrsive(ListNode* node) const
@@ -85,9 +100,9 @@ void mainMenu() //menu function
 	{
 		cout << "\n\x1b[36mPlease select an action: " << endl << endl;
 		cout << "\t1. Read file data to list" << endl;
-		cout << "\t2. Write to file from lisy" << endl;
+		cout << "\t2. Write to file from list" << endl;
 		cout << "\t3. Print list" << endl;
-		cout << "\t4. Print Reversed list" << endl;
+		cout << "\t4. Reverse list" << endl;
 
 		cout << "\x1b[0m"; cin >> choice; cout << endl;
 		switch(choice)  //switch statement to check user input and calling respective functions
@@ -109,7 +124,7 @@ void mainMenu() //menu function
 
 		case('4'):
 		{
-			list.PrintReverse();
+			list.ReverseList();
 		}; break;
 
 		case('s'):
