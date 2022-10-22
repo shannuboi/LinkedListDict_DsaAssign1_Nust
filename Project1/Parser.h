@@ -109,6 +109,8 @@ void readFileData(DictList& list) //reads text from a file and writes it to the 
 	
 		list.Insert(dict);
 	}
+	list.ReverseList();
+
 	fin.close();
 }
 
@@ -139,7 +141,10 @@ void mainMenu() //menu function
 		cout << "\t1. Read file data to list" << endl;
 		cout << "\t2. Write to file from list" << endl;
 		cout << "\t3. Print list" << endl;
-		cout << "\t4. Rearrange by patrity list" << endl;
+		cout << "\t4. Print list in reverse" << endl;
+		cout << "\t5. Reverse list" << endl;
+		cout << "\t6. Filter list" << endl;
+		cout << "\t7. Rearrange by parity list" << endl;
 
 		cout << "\x1b[0m"; cin >> choice; cout << endl;
 		switch(choice)  //switch statement to check user input and calling respective functions
@@ -161,7 +166,29 @@ void mainMenu() //menu function
 
 		case('4'):
 		{
+			list.PrintReverse();
+		}; break;
+
+		case('5'):
+		{
+			list.ReverseList();
+			cout << "\x1b[0;32mList Reversed.\x1b[0m\n";
+		}; break;
+
+		case('6'):
+		{
+			cout << "\x1b[46mEnter Filter Letter:\x1b[0m ";
+			string FilterLetter;
+			cin.ignore();
+			cin >> FilterLetter;
+			list.FilterByLetter(FilterLetter);
+			cout << "\x1b[0;32mList Filtered.\x1b[0m\n";
+		}; break;
+
+		case('7'):
+		{
 			list.RearrangeByEvenOddLength();
+			cout << "\x1b[0;32mList Rearranged.\x1b[0m\n";
 		}; break;
 
 		case('s'):
