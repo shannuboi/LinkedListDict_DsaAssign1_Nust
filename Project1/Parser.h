@@ -60,6 +60,27 @@ public:
 			}
 		}
 	}
+	void RearrangeByEvenOddLength()
+	{
+		DictList tempList;
+		for (ListNode* cur = start; cur; cur = cur->next) // loop until cur becomes null
+		{
+			if (cur->data.word.size() % 2 == 1)
+			{
+				tempList.Insert(cur->data);
+			}
+		}
+
+		for (ListNode* cur = start; cur; cur = cur->next) // loop until cur becomes null
+		{
+			if (cur->data.word.size() % 2 == 0)
+			{
+				tempList.Insert(cur->data);
+			}
+		}
+
+		*this = tempList;
+	}
 
 private:
 	void PrintReverseRecurrsive(ListNode* node) const
@@ -118,7 +139,7 @@ void mainMenu() //menu function
 		cout << "\t1. Read file data to list" << endl;
 		cout << "\t2. Write to file from list" << endl;
 		cout << "\t3. Print list" << endl;
-		cout << "\t4. Filter list" << endl;
+		cout << "\t4. Rearrange by patrity list" << endl;
 
 		cout << "\x1b[0m"; cin >> choice; cout << endl;
 		switch(choice)  //switch statement to check user input and calling respective functions
@@ -140,12 +161,7 @@ void mainMenu() //menu function
 
 		case('4'):
 		{
-			cout << "\x1b[46mEnter Filter Letter:\x1b[0m ";
-			string FilterLetter;
-			cin.ignore();
-			cin >> FilterLetter;
-			list.FilterByLetter(FilterLetter);
-			cout << "\x1b[0;32mList Filtered.\x1b[0m\n";
+			list.RearrangeByEvenOddLength();
 		}; break;
 
 		case('s'):
