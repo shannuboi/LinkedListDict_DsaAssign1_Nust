@@ -44,6 +44,22 @@ public:
 		}
 		start = prev;
 	}
+	void FilterByLetter(string letter)
+	{
+		for (ListNode* cur = start; cur;) // loop until cur becomes null
+		{
+			if (cur->data.word.find(letter) == string::npos) // if it dosn't contain the letter
+			{
+				Dictionary toBeDel = cur->data;
+				cur = cur->next;
+				Delete(toBeDel);
+			}
+			else
+			{
+				cur = cur->next;
+			}
+		}
+	}
 
 private:
 	void PrintReverseRecurrsive(ListNode* node) const
@@ -102,7 +118,7 @@ void mainMenu() //menu function
 		cout << "\t1. Read file data to list" << endl;
 		cout << "\t2. Write to file from list" << endl;
 		cout << "\t3. Print list" << endl;
-		cout << "\t4. Reverse list" << endl;
+		cout << "\t4. Filter list" << endl;
 
 		cout << "\x1b[0m"; cin >> choice; cout << endl;
 		switch(choice)  //switch statement to check user input and calling respective functions
@@ -124,7 +140,12 @@ void mainMenu() //menu function
 
 		case('4'):
 		{
-			list.ReverseList();
+			cout << "\x1b[46mEnter Filter Letter:\x1b[0m ";
+			string FilterLetter;
+			cin.ignore();
+			cin >> FilterLetter;
+			list.FilterByLetter(FilterLetter);
+			cout << "\x1b[0;32mList Filtered.\x1b[0m\n";
 		}; break;
 
 		case('s'):
