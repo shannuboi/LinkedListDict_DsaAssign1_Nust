@@ -132,8 +132,25 @@ typedef List_Node<Dictionary> ListNode;
 // Assignment Functions
 
 // Question 3
-void printReverse(ListNode *headNode) 
+void printReverse(ListNode* headNode) 
 {
 	if (headNode->next) printReverse(headNode->next);
 	cout << headNode->data << "\n";
+}
+
+// Question 4
+ListNode* reverseList(ListNode* start) {
+	ListNode* prev = nullptr;
+	ListNode* cur = start;
+
+	while (cur) // loop until cur becomes null
+	{
+		ListNode* tempNext = cur->next;
+
+		cur->next = prev;
+		prev = cur;
+		cur = tempNext;
+	}
+
+	return prev;
 }
