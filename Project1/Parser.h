@@ -83,6 +83,7 @@ void mainMenu() //menu function
     cout << "\t1. Read file data" << endl;
     cout << "\t2. Write to file" << endl;
     cout << "\t3. Print List" << endl;
+	cout << "\t4. Print list in reverse" << endl;
 
     cout << "\x1b[0m"; cin >> choice; cout << endl;
     switch(choice)  //switch statement to check user input and calling respective functions
@@ -98,6 +99,10 @@ void mainMenu() //menu function
 	  case('3'):
 	  {
 		  print(list.start);
+	  }; break;
+	  case('4'):
+	  {
+		  printReverse(list.start);
 	  }; break;
       case('s'):
       {

@@ -128,3 +128,12 @@ private:
 };
 
 typedef List_Node<Dictionary> ListNode;
+
+// Assignment Functions
+
+// Question 3
+void printReverse(ListNode *headNode) 
+{
+	if (headNode->next) printReverse(headNode->next);
+	cout << headNode->data << "\n";
+}
