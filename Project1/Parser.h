@@ -86,6 +86,7 @@ void mainMenu() //menu function
 	cout << "\t4. Print list in reverse" << endl;
 	cout << "\t5. Reverse list" << endl;
 	cout << "\t6. Rearrange by parity list" << endl;
+	cout << "\t7. Filter list" << endl;
 
     cout << "\x1b[0m"; cin >> choice; cout << endl;
     switch(choice)  //switch statement to check user input and calling respective functions
@@ -115,6 +116,15 @@ void mainMenu() //menu function
 	  {
 		  list.start = rearrangeByEvenOddLength(list.start);
 		  cout << "\x1b[0;32mList Rearranged.\x1b[0m\n";
+	  }; break;
+	  case('7'):
+	  {
+		  cout << "\x1b[46mEnter Filter Letter:\x1b[0m ";
+		  string FilterLetter;
+		  cin.ignore();
+		  cin >> FilterLetter;
+		  list.start = filterByLetters(list.start, FilterLetter);
+		  cout << "\x1b[0;32mList Filtered.\x1b[0m\n";
 	  }; break;
       case('s'):
       {

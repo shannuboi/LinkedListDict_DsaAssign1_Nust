@@ -129,7 +129,9 @@ private:
 
 typedef List_Node<Dictionary> ListNode;
 
-// Assignment Functions
+
+
+// ASSIGNMENT FUNCTIONS //
 
 // Question 3
 void printReverse(ListNode* headNode) 
@@ -203,3 +205,32 @@ ListNode* rearrangeByEvenOddLength(ListNode* start)
 	return start;
 }
 
+// Question 6
+ListNode* filterByLetters(ListNode* start, string letter) 
+{
+	for (ListNode* cur = start, * prev = nullptr; cur;) // loop until cur becomes null
+	{
+		if (cur->data.word.find(letter) == string::npos) // if it doesn't contain the letter
+		{
+			ListNode* temp = cur;
+
+			if (prev)
+			{
+				prev->next = cur->next;
+				cur = cur->next;
+			}
+			else //if start node
+			{
+				cur = cur->next;
+				start = cur;
+			}
+			
+			delete temp;
+		}
+		else
+		{
+			cur = (prev = cur)->next; //Move prev and cur
+		}
+	}
+	return start;
+}
