@@ -1,7 +1,8 @@
-#include<fstream>
-#include<iostream>
+#include <fstream>
+#include <iostream>
 #include "Dictionary.h"
 #include "List.h"
+
 using namespace std;
 
 string filename; //stores filename
@@ -11,18 +12,32 @@ void readFileData(ListNode **headNode) //reads text from a file. You should add 
   Dictionary *dict;
   string word, meaning;
   fstream fin;
-  cout << "\e[46mEnter the filename\x1b[0m "; 
+  cout << "\x1b[46mEnter the filename\x1b[0m "; 
   cin.ignore();
   cin >> filename;
   fin.open(filename);
-  cout << "\e[0;32mFile reading succesful.\x1b[0m\n";
+  cout << "\x1b[0;32mFile reading succesful.\x1b[0m\n";
   while( fin >> word )  //write into file name
   {
     fin.ignore();
     getline(fin,meaning);
-    dict = new Dictionary(word,meaning);
-    cout << *dict << endl; //output newly created Dictionary object
-    //remove above line and insert the new node to the linked list here
+    dict = new Dictionary(word,meaning); 
+
+	// Question 1
+	ListNode* newnode = new ListNode;
+	newnode->data = *dict;
+	if (*headNode != nullptr)
+	{
+		ListNode* cur = *headNode;
+		for (; cur->next != nullptr; cur = cur->next);
+		cur->next = newnode;
+	}
+	else
+	{
+		*headNode = newnode;
+	}
+
+	delete dict;
   }
   fin.close();
 }
@@ -32,24 +47,36 @@ void writeToFile(ListNode *headNode) //write the linked list to a text file
   string word, meaning;
   
   fstream dictFile; //create fstream object for the file
-  cout << "\e[46mEnter the filename\x1b[0m "; 
+  cout << "\x1b[46mEnter the filename\x1b[0m "; 
     cin.ignore();
   cin >> filename;
   dictFile.open(filename, std::ios::app); //create/open a text file in append mode. new information is always added to the end
 
-  //write to the textfile here
+  // Question 2
+  for (ListNode* cur = headNode; cur != nullptr; cur = cur->next) // loop until cur becomes null
+  {
+	  dictFile << cur->data.word << " " << cur->data.meaning << "\n";
+  }
   
   dictFile.close();
-  cout << "\e[0;32mDictionary entries added.\x1b[0m\n";
+  cout << "\x1b[0;32mDictionary entries added.\x1b[0m\n";
 }
 
+void print(ListNode* headNode)
+{
+	for (ListNode* cur = headNode; cur; cur = cur->next) // loop until cur becomes null
+	{
+		cout << cur->data << "\n";
+	}
+}
 
 void mainMenu() //menu function
 {
   string word, meaning; //stores the word and meaning
-  char choice;  //stores user choice for the actions
+  char choice = 0;  //stores user choice for the actions
+  SinglyLinkedList<Dictionary> list;
 
-  cout << "\e[1;35mInput 's' to terminate the program anytime.\e[0;37m" << endl;
+  cout << "\x1b[1;35mInput 's' to terminate the program anytime.\x1b[0;37m" << endl;
   while (choice != 's') //while loop until 's' is entered
   {
     cout << "\n\x1b[36mPlease select an action: " << endl << endl;
@@ -68,9 +95,13 @@ void mainMenu() //menu function
       {
         writeToFile(list.start);
       }; break;
+	  case('3'):
+	  {
+		  print(list.start);
+	  }; break;
       case('s'):
       {
-        cout << "\e[1;33mProgram terminated." << endl;
+        cout << "\x1b[1;33mProgram terminated." << endl;
       }; break;
       default:
         cout << "\x1b[31mInvalid action selected!\x1b[37m" << endl;
