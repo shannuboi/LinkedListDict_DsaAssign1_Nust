@@ -4,9 +4,9 @@
 
 template <typename T>
 class List_Node{   //class definition of Node 
-  public:
-    T data;
-    List_Node<T> *next;
+public:
+	T data;
+	List_Node<T> *next;
 };
 
 template <typename T>

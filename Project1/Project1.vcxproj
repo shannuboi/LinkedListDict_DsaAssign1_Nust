@@ -129,7 +129,6 @@
     <ClInclude Include="Dictionary.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Parser.h" />
-    <ClInclude Include="ParserOLD.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="words.txt" />
