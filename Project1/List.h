@@ -139,7 +139,8 @@ void printReverse(ListNode* headNode)
 }
 
 // Question 4
-ListNode* reverseList(ListNode* start) {
+ListNode* reverseList(ListNode* start) 
+{
 	ListNode* prev = nullptr;
 	ListNode* cur = start;
 
@@ -154,3 +155,51 @@ ListNode* reverseList(ListNode* start) {
 
 	return prev;
 }
+
+// Question 5
+ListNode* rearrangeByEvenOddLength(ListNode* start) 
+{
+	if (start) // If list is not empty
+	{
+		ListNode* oddLoc = start;
+		for (; oddLoc->next; oddLoc = oddLoc->next); // Loop until oddloc hits last node.
+
+		ListNode* prev = nullptr;
+		ListNode* cur = start;
+		ListNode* end = oddLoc;
+		while (cur != oddLoc)  
+		{
+			if (cur->data.word.size() % 2 == 1)
+			{
+				if (prev) // not start
+				{
+					prev->next = cur->next; //Remove cur from list
+
+					ListNode* temp = cur;
+					cur = cur->next;
+
+					temp->next = nullptr; //Move cur (stored in temp) to end
+					end->next = temp;
+					end = temp;
+				}
+				else // start is odd
+				{
+					cur = (prev = cur)->next; //Move prev and cur
+
+					ListNode* temp = start;
+					start = start->next; 
+					
+					temp->next = nullptr; //Move start (stored in temp) to end
+					end->next = temp;
+					end = temp;
+				}
+			}
+			else // even length word
+			{
+				cur = (prev = cur)->next; //Move prev and cur
+			}
+		}
+	}
+	return start;
+}
+
