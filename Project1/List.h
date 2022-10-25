@@ -108,6 +108,7 @@ public:
 		start = nullptr;
 	}
 
+	List_Node<T>* start = nullptr;
 private:
 	// Since it will insert after a node, pos acts like pos + 1 (Insertion happens after specified pos)  
 	void InsertAfter(T d, List_Node<T> * node, int pos)
@@ -124,7 +125,6 @@ private:
 			InsertAfter(d, node->next, pos - 1);
 		}
 	}
-	List_Node<T>* start = nullptr;
 };
 
 typedef List_Node<Dictionary> ListNode;
