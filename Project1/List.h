@@ -3,10 +3,10 @@
 #include <assert.h>
 
 template <typename T>
-class ListNode{   //class definition of Node 
+class List_Node{   //class definition of Node 
   public:
     T data;
-    ListNode *next;
+    List_Node<T> *next;
 };
 
 template <typename T>
@@ -28,7 +28,7 @@ public:
 		{
 			ClearList();
 
-			const ListNode* rhsptr = rhs.start;
+			const List_Node<T>* rhsptr = rhs.start;
 			for (int i = 0; rhsptr; i++) // loop until rhsptr becomes null
 			{
 				Insert(rhsptr->data, i);
@@ -43,7 +43,7 @@ public:
 	int GetLength() const
 	{
 		int count = 0;
-		for (ListNode* cur = start; cur; cur = cur->next) // loop until cur becomes null
+		for (List_Node<T>* cur = start; cur; cur = cur->next) // loop until cur becomes null
 		{
 			count++;
 		}
@@ -51,7 +51,7 @@ public:
 	}
 	bool Search(T d) const
 	{
-		for (ListNode* cur = start; cur; cur = cur->next) // loop until cur becomes null
+		for (List_Node<T>* cur = start; cur; cur = cur->next) // loop until cur becomes null
 		{
 			if (cur->data == d) return true;
 		}
@@ -63,7 +63,7 @@ public:
 		assert(pos >= 0 && pos <= GetLength());
 		if (pos == 0)
 		{
-			ListNode* newnode = new ListNode;
+			List_Node<T>* newnode = new List_Node<T>;
 			newnode->data = d;
 			newnode->next = start;
 			start = newnode;
@@ -75,8 +75,8 @@ public:
 	}
 	void Delete(T d)
 	{
-		ListNode* cur = start;
-		ListNode* last = nullptr;
+		List_Node<T>* cur = start;
+		List_Node<T>* last = nullptr;
 		while (cur && cur->data != d) // loop until cur becomes null
 		{
 			last = cur;
@@ -99,24 +99,22 @@ public:
 	}
 	void ClearList()
 	{
-		for (ListNode* cur = start; cur;) // loop until cur becomes null
+		for (List_Node<T>* cur = start; cur;) // loop until cur becomes null
 		{
-			ListNode* temp = cur;
+			List_Node<T>* temp = cur;
 			cur = cur->next;
 			delete temp;
 		}
 		start = nullptr;
 	}
 
-protected:
-	typedef ListNode<T> ListNode;
-
+private:
 	// Since it will insert after a node, pos acts like pos + 1 (Insertion happens after specified pos)  
-	void InsertAfter(T d, ListNode * node, int pos)
+	void InsertAfter(T d, List_Node<T> * node, int pos)
 	{
 		if (pos == 0)
 		{
-			ListNode* newnode = new ListNode;
+			List_Node<T>* newnode = new List_Node<T>;
 			newnode->data = d;
 			newnode->next = node->next;
 			node->next = newnode;
@@ -126,5 +124,7 @@ protected:
 			InsertAfter(d, node->next, pos - 1);
 		}
 	}
-	ListNode* start = nullptr;
+	List_Node<T>* start = nullptr;
 };
+
+typedef List_Node<Dictionary> ListNode;
